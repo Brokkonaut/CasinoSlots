@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.bukkit.Instrument;
-import org.bukkit.Material;
 import org.bukkit.Note;
 import org.bukkit.Note.Tone;
 import org.bukkit.block.Block;
@@ -42,7 +41,7 @@ public class ResultsTask implements Runnable {
 
             if (!(slot.getSign() == null)) {
                 Block b = slot.getSign();
-                if (b.getType().equals(Material.WALL_SIGN) || b.getType().equals(Material.SIGN)) {
+                if (Util.isSign(b.getType())) {
                     Sign sign = (Sign) b.getState();
                     sign.setLine(3, player.getDisplayName());
                     sign.update(true);

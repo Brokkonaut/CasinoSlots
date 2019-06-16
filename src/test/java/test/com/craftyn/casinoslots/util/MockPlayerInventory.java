@@ -95,11 +95,6 @@ public class MockPlayerInventory implements PlayerInventory {
     }
 
     @Override
-    public String getName() {
-        return "MockInventory";
-    }
-
-    @Override
     public ItemStack getItem(int i) {
         if (i >= 0 && i < inventorySize) {
             return inventoryContents[i];
@@ -226,11 +221,6 @@ public class MockPlayerInventory implements PlayerInventory {
 
     @Override
     public List<HumanEntity> getViewers() {
-        return null;
-    }
-
-    @Override
-    public String getTitle() {
         return null;
     }
 

@@ -14,7 +14,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.craftyn.casinoslots.actions.ActionFactory;
 import com.craftyn.casinoslots.command.AnCommandExecutor;
 import com.craftyn.casinoslots.listeners.BlockListener;
-import com.craftyn.casinoslots.listeners.ChunkListener;
 import com.craftyn.casinoslots.listeners.EntityListener;
 import com.craftyn.casinoslots.listeners.PlayerListener;
 import com.craftyn.casinoslots.slot.SlotManager;
@@ -38,7 +37,6 @@ public class CasinoSlots extends JavaPlugin {
 
     private PlayerListener playerListener;
     private BlockListener blockListener;
-    private ChunkListener chunkListener;
     private EntityListener entity;
     private AnCommandExecutor commandExecutor;
 
@@ -51,7 +49,7 @@ public class CasinoSlots extends JavaPlugin {
     private ActionFactory actionFactory = null;
 
     public void onEnable() {
-        //loadConfig();
+        loadConfig();
         
         //Verify vault is installed before loading anything
         pm = this.getServer().getPluginManager();
@@ -80,7 +78,6 @@ public class CasinoSlots extends JavaPlugin {
         
         this.playerListener = new PlayerListener(this);
         this.blockListener = new BlockListener(this);
-        this.chunkListener = new ChunkListener(this);
         this.entity = new EntityListener(this);
         this.commandExecutor = new AnCommandExecutor(this);
         
@@ -118,7 +115,6 @@ public class CasinoSlots extends JavaPlugin {
 
         pm.registerEvents(playerListener, this);
         pm.registerEvents(blockListener, this);
-        pm.registerEvents(chunkListener, this);
         pm.registerEvents(entity, this);
 
         reloadUpdateCheck();

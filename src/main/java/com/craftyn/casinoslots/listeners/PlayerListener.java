@@ -20,6 +20,7 @@ import com.craftyn.casinoslots.classes.SlotMachine;
 import com.craftyn.casinoslots.classes.Type;
 import com.craftyn.casinoslots.slot.game.Game;
 import com.craftyn.casinoslots.util.PermissionUtil;
+import com.craftyn.casinoslots.util.Util;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldguard.WorldGuard;
 
@@ -140,7 +141,7 @@ public class PlayerListener implements Listener {
                     }
                 }
 
-                if (b.getType().equals(Material.WALL_SIGN) || b.getType().equals(Material.SIGN)) {
+                if (Util.isSign(b.getType())) {
                     SlotMachine slot = plugin.getSlotManager().getSignPunchingSlot(player.getName());
 
                     Sign sign = (Sign) b.getState();
