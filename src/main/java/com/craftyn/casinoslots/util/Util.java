@@ -40,6 +40,11 @@ public class Util {
         }
     }
 
+    /**
+     * Checks if a {@link Material} is a sign.
+     * @param m the {@link Material} to check
+     * @return true, if it is a sign.
+     */
     public static boolean isSign(Material m) {
         return SIGNS.contains(m);
     }
