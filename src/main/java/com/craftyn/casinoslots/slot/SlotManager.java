@@ -219,7 +219,7 @@ public class SlotManager {
             String[] b = coord.split("\\,");
             Location loc = new Location(world, Integer.parseInt(b[0]), Integer.parseInt(b[1]), Integer.parseInt(b[2]));
             blocks.add(loc.getBlock());
-            loc.getChunk().load();
+            loc.getChunk();
         }
 
         return blocks;
