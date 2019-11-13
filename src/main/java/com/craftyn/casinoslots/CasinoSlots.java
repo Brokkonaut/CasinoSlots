@@ -14,7 +14,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.craftyn.casinoslots.actions.ActionFactory;
 import com.craftyn.casinoslots.command.AnCommandExecutor;
 import com.craftyn.casinoslots.listeners.BlockListener;
-import com.craftyn.casinoslots.listeners.EntityListener;
 import com.craftyn.casinoslots.listeners.PlayerListener;
 import com.craftyn.casinoslots.slot.SlotManager;
 import com.craftyn.casinoslots.slot.TypeManager;
@@ -35,7 +34,6 @@ public class CasinoSlots extends JavaPlugin {
 
     private PlayerListener playerListener;
     private BlockListener blockListener;
-    private EntityListener entity;
     private AnCommandExecutor commandExecutor;
 
     private ConfigData configData;
@@ -76,7 +74,6 @@ public class CasinoSlots extends JavaPlugin {
         
         this.playerListener = new PlayerListener(this);
         this.blockListener = new BlockListener(this);
-        this.entity = new EntityListener(this);
         this.commandExecutor = new AnCommandExecutor(this);
         
         this.configData = new ConfigData(this);
@@ -113,7 +110,6 @@ public class CasinoSlots extends JavaPlugin {
 
         pm.registerEvents(playerListener, this);
         pm.registerEvents(blockListener, this);
-        pm.registerEvents(entity, this);
  
         //Allow actions to be injected before we load anything 
         this.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
