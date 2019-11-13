@@ -32,14 +32,7 @@ public class PlayerListener implements Listener {
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void notifyOpsOfUpdate(PlayerJoinEvent event) {
-        if(plugin.getConfig().getBoolean("options.update-checking.enabled")) {
-            if(event.getPlayer().isOp() && plugin.getUpdate().isAvailable()) {
-                event.getPlayer().sendMessage(ChatColor.BLUE + "" + ChatColor.BOLD + "An update for Jail is available: " + plugin.getUpdate().getNewVersion());
-                event.getPlayer().sendMessage(ChatColor.BLUE + "" + ChatColor.BOLD + plugin.getUpdate().getFileUrl());
-            }
-        }
-        
+    public void onPlayerJoin(PlayerJoinEvent event) {
         //Update the owners of the slot machines when they login
         for(SlotMachine s : plugin.getSlotManager().getSlots()) {
             if(s.getOwnerId().equals(event.getPlayer().getUniqueId())) {
