@@ -29,8 +29,6 @@ public class CasinoSlots extends JavaPlugin {
     private PluginManager pm = null;
     private Towny towny = null;
     private WorldGuardPlugin worldGuard = null;
-    private Update update;
-    private int updateCheckTask;
 
     public boolean useTowny = false, useWorldGuard = false;
     private boolean internalDebug = false;
@@ -116,9 +114,7 @@ public class CasinoSlots extends JavaPlugin {
         pm.registerEvents(playerListener, this);
         pm.registerEvents(blockListener, this);
         pm.registerEvents(entity, this);
-
-        reloadUpdateCheck();
-        
+ 
         //Allow actions to be injected before we load anything 
         this.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             public void run() {
@@ -196,35 +192,6 @@ public class CasinoSlots extends JavaPlugin {
         if (pl != null && pl instanceof Towny) {
             towny = (Towny)pl;
         }
-    }
-
-    /** Reloads the update checker, in case they changed a setting about it. */
-    public void reloadUpdateCheck() {
-        getServer().getScheduler().cancelTask(updateCheckTask);
-        update = new Update(this);
-        debug("Check for updates: " + getConfig().getBoolean("options.update-checking.enabled"));
-        
-        if(getConfig().getBoolean("options.update-checking.enabled")) {
-            try {
-                updateCheckTask = getServer().getScheduler().runTaskTimerAsynchronously(this, new Runnable() {
-                    public void run() {
-                        update.query();
-                    }
-                }, 100L, getConfig().getInt("options.update-checking.time", 120) * 1200).getTaskId();
-            } catch (Exception e) {
-                e.printStackTrace();
-                getLogger().severe("Was unable to schedule the update checking, please check your time format is correct.");
-            }
-        }
-    }
-
-    /**
-     * Returns the instance of the update checking class.
-     * 
-     * @return instance of {@link Update}
-     */
-    public Update getUpdate() {
-        return this.update;
     }
 
     /**
