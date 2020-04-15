@@ -1,5 +1,7 @@
 package com.craftyn.casinoslots.command;
 
+import com.craftyn.casinoslots.events.CasinoMoneyTransactionEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import com.craftyn.casinoslots.CasinoSlots;
@@ -52,6 +54,7 @@ public class AnSlot extends AnCommand {
                 if(PermissionUtil.canCreate(player, type)) {
                     if(plugin.getEconomy().has(player, type.getCreateCost())) {
                         plugin.getEconomy().withdrawPlayer(player, type.getCreateCost());
+                        Bukkit.getPluginManager().callEvent(new CasinoMoneyTransactionEvent(System.currentTimeMillis(), player.getUniqueId(), - type.getCreateCost()));
                         slot.setType(type);
                     }
                     else {
@@ -112,6 +115,7 @@ public class AnSlot extends AnCommand {
 
                 slot.deposit(amount);
                 plugin.getEconomy().withdrawPlayer(player, amount);
+                Bukkit.getPluginManager().callEvent(new CasinoMoneyTransactionEvent(System.currentTimeMillis(), player.getUniqueId(), - amount));
                 sendMessage("Deposited " + amount +" to " + slot.getName());
             }
         }
@@ -133,6 +137,7 @@ public class AnSlot extends AnCommand {
 
             slot.withdraw(amount);
             plugin.getEconomy().depositPlayer(player, amount);
+            Bukkit.getPluginManager().callEvent(new CasinoMoneyTransactionEvent(System.currentTimeMillis(), player.getUniqueId(), amount));
             sendMessage("Withdrew " + amount +" from " + slot.getName());
         }
 

@@ -1,5 +1,7 @@
 package com.craftyn.casinoslots.command;
 
+import com.craftyn.casinoslots.events.CasinoMoneyTransactionEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -48,6 +50,7 @@ public class CasinoWithdraw extends AnCommand {
                     }else {
                         slot.withdraw(amount);
                         plugin.getEconomy().depositPlayer(player, amount);
+                        Bukkit.getPluginManager().callEvent(new CasinoMoneyTransactionEvent(System.currentTimeMillis(), player.getUniqueId(), amount));
                         sendMessage(amount +  " withdrew from " + args[1] + ".");
                         sendMessage(args[1] + " now has " + slot.getFunds() + " in it.");
                         plugin.getSlotManager().saveSlot(slot);

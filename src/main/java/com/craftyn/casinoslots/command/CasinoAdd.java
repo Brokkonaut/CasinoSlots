@@ -1,5 +1,7 @@
 package com.craftyn.casinoslots.command;
 
+import com.craftyn.casinoslots.events.CasinoMoneyTransactionEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -74,6 +76,7 @@ public class CasinoAdd extends AnCommand {
                 Double createCost = type.getCreateCost();
                 if(plugin.getEconomy().has(player, createCost)) {
                     plugin.getEconomy().withdrawPlayer(player, createCost);
+                    Bukkit.getPluginManager().callEvent(new CasinoMoneyTransactionEvent(System.currentTimeMillis(), player.getUniqueId(), - createCost));
                 } else {
                     sendMessage(player.getName());
                     sendMessage("You do not have enough to afford to create this slot machine. The cost is: " + createCost);

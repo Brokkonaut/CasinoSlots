@@ -1,5 +1,7 @@
 package com.craftyn.casinoslots.command;
 
+import com.craftyn.casinoslots.events.CasinoMoneyTransactionEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import com.craftyn.casinoslots.CasinoSlots;
@@ -39,6 +41,7 @@ public class CasinoDeposit extends AnCommand {
                     if (plugin.getEconomy().has(player, amount)) {
                         slot.deposit(amount);
                         plugin.getEconomy().withdrawPlayer(player, amount);
+                        Bukkit.getPluginManager().callEvent(new CasinoMoneyTransactionEvent(System.currentTimeMillis(), player.getUniqueId(), - amount));
                         sendMessage(amount +  " deposited to " + args[1] + ".");
                         sendMessage(args[1] + " now has " + slot.getFunds() + " in it.");
                         plugin.getSlotManager().saveSlot(slot);

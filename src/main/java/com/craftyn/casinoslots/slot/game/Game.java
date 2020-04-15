@@ -1,5 +1,7 @@
 package com.craftyn.casinoslots.slot.game;
 
+import com.craftyn.casinoslots.events.CasinoMoneyTransactionEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -64,6 +66,7 @@ public class Game {
         if (!slot.isItem()) {
             Double cost = getType().getCost();
             plugin.getEconomy().withdrawPlayer(player, cost);
+            Bukkit.getPluginManager().callEvent(new CasinoMoneyTransactionEvent(System.currentTimeMillis(), player.getUniqueId(), - cost));
             if (slot.isManaged()) {
                 slot.deposit(cost);
                 plugin.getSlotManager().saveSlot(slot);
