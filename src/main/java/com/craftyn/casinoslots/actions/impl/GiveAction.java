@@ -41,43 +41,17 @@ public class GiveAction extends Action {
                 throw new ActionLoadingException("The amount for the item passed into '" + this.getName() + "' action for " + type.getName() + " is not a valid number.");
             }
 
-            if(args[0].contains(","))
+            if(args[0].contains(",") || args[0].contains(":")) {
                 throw new ActionLoadingException("You're using an old version of the give action, please update: https://github.com/graywolf336/CasinoSlots/wiki");
-            
-            if (args[0].contains(":")) {
-                String[] matertialParts = args[0].split(":");
-
-                if (matertialParts.length != 2)
-                    throw new ActionLoadingException("The item's material for the item passed into '" + this.getName() + "' action for " + type.getName() + " is not a valid material. (" + args[0] + ")");
-
-                try {
-                    Material m = Material.matchMaterial(matertialParts[0]);
-
-                    if (m == null)
-                        throw new Exception();
-
-                    item.setType(m);
-                } catch (Exception ex) {
-                    throw new ActionLoadingException("The item's material for the item passed into '" + this.getName() + "' action for " + type.getName() + " is not a valid material. (" + matertialParts[0] + ")");
-                }
-
-                try {
-                    item.setDurability(Short.parseShort(matertialParts[1]));
-                } catch (NumberFormatException e) {
-                    throw new ActionLoadingException("The item's data for the item passed into '" + this.getName() + "' action for " + type.getName() + " is not a valid number. (" + args[0] + ")");
-                }
-            } else {
-                    try {
-                        Material m = Material.matchMaterial(args[0]);
-
-                        if (m == null)
-                            throw new Exception();
-
-                        item.setType(m);
-                    } catch (Exception ex) {
-                        throw new ActionLoadingException("The item's material for the item passed into '" + this.getName() + "' action for " + type.getName() + " is not a valid material. (" + args[0] + ")");
-                    }
             }
+
+            Material m = Material.matchMaterial(args[0]);
+
+            if (m == null || !m.isItem()) {
+                throw new ActionLoadingException("The item's material for the item passed into '" + this.getName() + "' action for " + type.getName() + " is not a valid material. (" + args[0] + ")");
+            }
+
+            item.setType(m);
         }
 
         if (args.length >= 3) {
