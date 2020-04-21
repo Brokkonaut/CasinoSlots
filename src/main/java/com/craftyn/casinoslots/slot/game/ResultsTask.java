@@ -50,7 +50,7 @@ public class ResultsTask implements Runnable {
                 }
             }
             
-            won += type.sendRewards(results, player);
+            won += type.sendRewards(results, game, player);
             
             //Take the money from the slot machine, if it is managed
             if (slot.isManaged()) {

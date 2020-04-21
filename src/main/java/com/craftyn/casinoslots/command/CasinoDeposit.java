@@ -4,6 +4,7 @@ import org.bukkit.entity.Player;
 
 import com.craftyn.casinoslots.CasinoSlots;
 import com.craftyn.casinoslots.classes.SlotMachine;
+import com.craftyn.casinoslots.event.CasinoDepositEvent;
 
 public class CasinoDeposit extends AnCommand {
 
@@ -22,14 +23,12 @@ public class CasinoDeposit extends AnCommand {
 
                 // Can access slot
                 if(isOwner(slot)) {
-                    String Line3 = args[2];
                     double amount;
                     try {
-                        if (Line3.startsWith("-")) {
+                        amount = Double.parseDouble(args[2]);
+                        if (amount <= 0 || !Double.isFinite(amount)) {
                             sendMessage("Must deposit a postive amount.");
                             return true;
-                        }else {
-                            amount = Double.parseDouble(args[2]);
                         }
                     } catch (NumberFormatException e) {
                         sendMessage("Third arugment must be a number.");
@@ -37,6 +36,9 @@ public class CasinoDeposit extends AnCommand {
                     }
 
                     if (plugin.getEconomy().has(player, amount)) {
+                        if (new CasinoDepositEvent(player, slot, amount).call().isCancelled()) {
+                            return true;
+                        }
                         slot.deposit(amount);
                         plugin.getEconomy().withdrawPlayer(player, amount);
                         sendMessage(amount +  " deposited to " + args[1] + ".");

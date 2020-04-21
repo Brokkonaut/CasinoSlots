@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 
 import com.craftyn.casinoslots.CasinoSlots;
 import com.craftyn.casinoslots.classes.SlotMachine;
+import com.craftyn.casinoslots.event.CasinoWithdrawEvent;
 
 public class CasinoWithdraw extends AnCommand {
 
@@ -27,15 +28,13 @@ public class CasinoWithdraw extends AnCommand {
                         sendMessage(ChatColor.RED + "You can't withdraw money while the machine is in use!");
                         return true;
                     }
-                    
-                    String Line3 = args[2];
+
                     double amount;
                     try {
-                        if (Line3.startsWith("-")) {
-                            sendMessage("Must deposit a postive amount.");
+                        amount = Double.parseDouble(args[2]);
+                        if (amount <= 0 || !Double.isFinite(amount)) {
+                            sendMessage("Must withdraw a postive amount.");
                             return true;
-                        }else {
-                            amount = Double.parseDouble(args[2]);
                         }
                     } catch (NumberFormatException e) {
                         sendMessage("Third arugment must be a number.");
@@ -45,7 +44,11 @@ public class CasinoWithdraw extends AnCommand {
                     if (amount > slot.getFunds()) {
                         sendMessage("You can't withdraw more than is in the slot's account.");
                         return true;
-                    }else {
+                    } else {
+                        if (new CasinoWithdrawEvent(player, slot, amount).call().isCancelled()) {
+                            return true;
+                        }
+
                         slot.withdraw(amount);
                         plugin.getEconomy().depositPlayer(player, amount);
                         sendMessage(amount +  " withdrew from " + args[1] + ".");

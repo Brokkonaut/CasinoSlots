@@ -1,6 +1,7 @@
 package com.craftyn.casinoslots.classes;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,8 @@ import org.bukkit.entity.Player;
 
 import com.craftyn.casinoslots.CasinoSlots;
 import com.craftyn.casinoslots.actions.Action;
+import com.craftyn.casinoslots.event.CasinoWinEvent;
+import com.craftyn.casinoslots.slot.game.Game;
 
 public class Type {
     private CasinoSlots plugin;
@@ -179,7 +182,7 @@ public class Type {
         return max;
     }
 
-    public double sendRewards(List<BlockData> results, Player player) {
+    public double sendRewards(List<BlockData> results, Game game, Player player) {
         double won = 0;
         List<String> messagesSent = new ArrayList<String>();
         
@@ -201,6 +204,8 @@ public class Type {
                 }
             }
         }
+        
+        new CasinoWinEvent(player, game.getSlot(), Collections.unmodifiableList(results), won).call();
         
         if (won < 0) {
             plugin.getEconomy().withdrawPlayer(player, Math.abs(won));

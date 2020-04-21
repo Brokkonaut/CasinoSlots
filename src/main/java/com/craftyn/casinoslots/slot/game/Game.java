@@ -8,6 +8,7 @@ import com.craftyn.casinoslots.CasinoSlots;
 import com.craftyn.casinoslots.classes.SlotMachine;
 import com.craftyn.casinoslots.classes.Type;
 import com.craftyn.casinoslots.enums.SlotMachineColumnType;
+import com.craftyn.casinoslots.event.CasinoPlayEvent;
 
 public class Game {
     private CasinoSlots plugin;
@@ -57,6 +58,10 @@ public class Game {
 
         if (!slot.isEnabled()) {
             plugin.sendMessage(player, "This slot machine is currently disabled. Deposit more funds to enable.");
+            return;
+        }
+
+        if (new CasinoPlayEvent(player, slot).call().isCancelled()) {
             return;
         }
 
