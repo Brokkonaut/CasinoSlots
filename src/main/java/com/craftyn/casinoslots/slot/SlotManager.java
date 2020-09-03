@@ -178,7 +178,7 @@ public class SlotManager {
             ownerid = UUID.fromString(plugin.getConfigData().slots.getString(path + "ownerid"));
         }catch(Exception e) {
             plugin.log("Trying to load the " + owner + "'s uuid for their slot machine " + name);
-            ownerid = plugin.getServer().getOfflinePlayer(owner).getUniqueId();
+            ownerid = getOfflinePlayerUUID(owner);
             save = true;
         }
         
@@ -200,6 +200,11 @@ public class SlotManager {
         addSlot(slot);
         
         return save;
+    }
+
+    @SuppressWarnings("deprecation")
+    private UUID getOfflinePlayerUUID(String player) {
+        return plugin.getServer().getOfflinePlayer(player).getUniqueId();
     }
 
     // Gets reel blocks location from disk
