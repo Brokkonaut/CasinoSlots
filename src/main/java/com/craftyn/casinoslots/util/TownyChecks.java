@@ -8,7 +8,7 @@ import com.craftyn.casinoslots.CasinoSlots;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.TownBlock;
-import com.palmergames.bukkit.towny.object.TownyUniverse;
+import com.palmergames.bukkit.towny.TownyAPI;
 
 public class TownyChecks {
     private CasinoSlots plugin;
@@ -29,13 +29,9 @@ public class TownyChecks {
      */
     public boolean checkTown(Player player) {
         if(PermissionUtil.isAdmin(player)) return true;
-        Resident res = null;
+        Resident res = TownyAPI.getInstance().getResident(player);
 
-        try {
-            res = TownyUniverse.getDataSource().getResident(player.getName());
-        } catch (NotRegisteredException e) {return false;}
-
-        return res.hasTown();
+        return res != null && res.hasTown();
     }
 
     /**
@@ -50,13 +46,9 @@ public class TownyChecks {
      */
     public boolean checkMayor(Player player) {
         if(PermissionUtil.isAdmin(player)) return true;
-        Resident res = null;
+        Resident res = TownyAPI.getInstance().getResident(player);
 
-        try {
-            res = TownyUniverse.getDataSource().getResident(player.getName());
-        } catch (NotRegisteredException e) {return false;}
-
-        return res.isMayor();
+        return res != null && res.isMayor();
     }
 
     /**
@@ -68,19 +60,19 @@ public class TownyChecks {
      */
     public boolean checkSingleTowny(Block check, String player) {
         Resident res = null, resC = null;
-        TownBlock tbC = TownyUniverse.getTownBlock(check.getLocation());
+        TownBlock tbC = TownyAPI.getInstance().getTownBlock(check.getLocation());
 
         if(tbC == null)
             return false;
 
         try {
-            res = TownyUniverse.getDataSource().getResident(player);
+            res = TownyAPI.getInstance().getResident(player);
             resC = tbC.getResident();
         } catch (NotRegisteredException e) {return false;}
 
         plugin.debug("The single block we're check resident is: " + resC.getName());
 
-        if(res.equals(resC))
+        if(res != null && res.equals(resC))
             return true;
         else
             return false;
@@ -96,21 +88,16 @@ public class TownyChecks {
      */
     public boolean checkSlotsTowny(Block check, BlockFace face, String player) {
         Resident res = null, resL = null, resC = null, resR = null;
-        TownBlock tbL = TownyUniverse.getTownBlock(check.getRelative(getDirection(face, "left"), 2).getLocation());
-        TownBlock tbC = TownyUniverse.getTownBlock(check.getLocation());
-        TownBlock tbR = TownyUniverse.getTownBlock(check.getRelative(getDirection(face, "left"), 2).getLocation());
+        TownBlock tbL = TownyAPI.getInstance().getTownBlock(check.getRelative(getDirection(face, "left"), 2).getLocation());
+        TownBlock tbC = TownyAPI.getInstance().getTownBlock(check.getLocation());
+        TownBlock tbR = TownyAPI.getInstance().getTownBlock(check.getRelative(getDirection(face, "left"), 2).getLocation());
 
         plugin.debug("Does the left block have a town: " + tbL.hasTown());
         plugin.debug("Does the center block have a town: " + tbC.hasTown());
         plugin.debug("Does the right block have a town: " + tbR.hasTown());
 
-        try {
-            res = TownyUniverse.getDataSource().getResident(player);
-            plugin.debug("Got the Towny Resident for the player: " + player);
-        } catch (NotRegisteredException e) {
-            plugin.debug("The player's resident isn't registered: " + player);
-            return false;
-        }
+        res = TownyAPI.getInstance().getResident(player);
+        plugin.debug("Got the Towny Resident for the player: " + player);
 
         try {
             resL = tbL.getResident();
@@ -140,7 +127,7 @@ public class TownyChecks {
         plugin.debug("The center block resident is: " + resC.getName());
         plugin.debug("The right block resident is: " + resR.getName());
 
-        if(res.equals(resL) && res.equals(resC) && res.equals(resR))
+        if(res != null && res.equals(resL) && res.equals(resC) && res.equals(resR))
             return true;
         else
             return false;
