@@ -10,6 +10,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
@@ -303,5 +304,19 @@ public class MockPlayerInventory implements PlayerInventory {
 
     @Override
     public void setItemInOffHand(ItemStack paramItemStack) {
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
+
+    @Override
+    public void setItem(EquipmentSlot slot, ItemStack item) {
+    }
+
+    @Override
+    public ItemStack getItem(EquipmentSlot slot) {
+        return null;
     }
 }
