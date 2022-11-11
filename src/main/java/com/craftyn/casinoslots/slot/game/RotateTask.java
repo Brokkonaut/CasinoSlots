@@ -43,13 +43,13 @@ public class RotateTask implements Runnable {
         }
 
         // First block
-        blocks.get(column.getFirstRow()).setBlockData(block.getBlockData(), false);
+        blocks.get(column.getFirstRow()).setBlockData(block.getBlockData());
 
         // Second block
-        blocks.get(column.getSecondRow()).setBlockData(last.get(0), false);
+        blocks.get(column.getSecondRow()).setBlockData(last.get(0));
 
         // Third block
-        blocks.get(column.getThirdRow()).setBlockData(last.get(1), false);
+        blocks.get(column.getThirdRow()).setBlockData(last.get(1));
 
     }
 
