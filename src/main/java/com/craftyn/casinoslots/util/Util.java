@@ -1,19 +1,16 @@
 package com.craftyn.casinoslots.util;
 
-import java.util.EnumSet;
 import org.bukkit.Instrument;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Note;
 import org.bukkit.Note.Tone;
 import org.bukkit.block.data.type.NoteBlock;
+import org.bukkit.block.data.type.Sign;
+import org.bukkit.block.data.type.WallSign;
 import org.bukkit.entity.Player;
 
 public class Util {
-
-    private final static EnumSet<Material> SIGNS = EnumSet.of(Material.OAK_SIGN, Material.OAK_WALL_SIGN, Material.BIRCH_SIGN, Material.BIRCH_WALL_SIGN, Material.SPRUCE_SIGN, Material.SPRUCE_WALL_SIGN, Material.JUNGLE_SIGN, Material.JUNGLE_WALL_SIGN, Material.DARK_OAK_SIGN,
-            Material.DARK_OAK_WALL_SIGN, Material.ACACIA_SIGN, Material.ACACIA_WALL_SIGN);
-
     /**
      * Plays the CasinoSlot game sound at the given location.
      * 
@@ -46,6 +43,6 @@ public class Util {
      * @return true, if it is a sign.
      */
     public static boolean isSign(Material m) {
-        return SIGNS.contains(m);
+        return m.data == Sign.class || m.data == WallSign.class;
     }
 }
