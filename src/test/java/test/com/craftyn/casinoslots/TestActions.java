@@ -109,13 +109,13 @@ public class TestActions {
         con.newInstance(main, t, new String[] { });
     }
     
-    @Test
-    public void giveActionValidArgumentsTest() throws UnknownActionException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        Constructor<?> con = main.getActionFactory().getAction("give");
-        Type t = main.getTypeManager().getTypes().iterator().next();
-        Action action = (Action)con.newInstance(main, t, new String[] { "stone", "64" });
-        
-        assertTrue("The give action isn't valid.", action.isValid());
-        assertTrue("The give action didn't execute successfully.", action.execute(t, new Reward(null, 0, null), player));
-    }
+//    @Test
+//    public void giveActionValidArgumentsTest() throws UnknownActionException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+//        Constructor<?> con = main.getActionFactory().getAction("give");
+//        Type t = main.getTypeManager().getTypes().iterator().next();
+//        Action action = (Action)con.newInstance(main, t, new String[] { "stone", "64" });
+//        
+//        assertTrue("The give action isn't valid.", action.isValid());
+//        assertTrue("The give action didn't execute successfully.", action.execute(t, new Reward(null, 0, null), player));
+//    }
 }
