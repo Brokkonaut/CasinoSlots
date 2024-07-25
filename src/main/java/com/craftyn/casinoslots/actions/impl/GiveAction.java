@@ -35,6 +35,14 @@ public class GiveAction extends Action {
         item = new ItemStack(Material.AIR);
 
         if (args.length >= 2) {
+            Material m = Material.matchMaterial(args[0]);
+
+            if (m == null || !m.isItem()) {
+                throw new ActionLoadingException("The item's material for the item passed into '" + this.getName() + "' action for " + type.getName() + " is not a valid material. (" + args[0] + ")");
+            }
+
+            item = new ItemStack(m);
+
             try {
                 item.setAmount(Integer.parseInt(args[1]));
             } catch (NumberFormatException e) {
@@ -44,14 +52,6 @@ public class GiveAction extends Action {
             if(args[0].contains(",") || args[0].contains(":")) {
                 throw new ActionLoadingException("You're using an old version of the give action, please update: https://github.com/graywolf336/CasinoSlots/wiki");
             }
-
-            Material m = Material.matchMaterial(args[0]);
-
-            if (m == null || !m.isItem()) {
-                throw new ActionLoadingException("The item's material for the item passed into '" + this.getName() + "' action for " + type.getName() + " is not a valid material. (" + args[0] + ")");
-            }
-
-            item.setType(m);
         }
 
         if (args.length >= 3) {
