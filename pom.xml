@@ -1,252 +1,262 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.craftyn</groupId>
-	<artifactId>CasinoSlots</artifactId>
-	<version>3.0.0-SNAPSHOT</version>
-	<name>CasinoSlots</name>
-	<description>Real CasinoSlots in Minecraft.</description>
-	<url>http://dev.bukkit.org/server-mods/casino-slots</url>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.craftyn</groupId>
+    <artifactId>CasinoSlots</artifactId>
+    <version>3.0.0-SNAPSHOT</version>
+    <name>CasinoSlots</name>
+    <description>Real CasinoSlots in Minecraft.</description>
+    <url>http://dev.bukkit.org/server-mods/casino-slots</url>
 
-	<ciManagement>
-		<system>Jenkins</system>
-		<url>https://ci.craftyn.com/job/CasinoSlots/</url>
-	</ciManagement>
-	
-	<issueManagement>
-		<system>GitHub</system>
-		<url>https://github.com/graywolf336/CasinoSlots/issues</url>
-	</issueManagement>
+    <ciManagement>
+        <system>Jenkins</system>
+        <url>https://ci.craftyn.com/job/CasinoSlots/</url>
+    </ciManagement>
 
-	<scm>
-		<url>https://github.com/graywolf336/CasinoSlots</url>
-		<connection>scm:git:git:@github.com:graywolf336/CasinoSlots.git</connection>
-		<developerConnection>scm:git:git://github.com/graywolf336/CasinoSlots.git</developerConnection>
-	</scm>
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/graywolf336/CasinoSlots/issues</url>
+    </issueManagement>
 
-	<properties>
-		<project.build.number>0</project.build.number>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
+    <scm>
+        <url>https://github.com/graywolf336/CasinoSlots</url>
+        <connection>scm:git:git:@github.com:graywolf336/CasinoSlots.git</connection>
+        <developerConnection>
+            scm:git:git://github.com/graywolf336/CasinoSlots.git</developerConnection>
+    </scm>
 
-	<repositories>
-		<repository>
-			<id>spigotmc-repo</id>
-			<url>https://hub.spigotmc.org/nexus/content/groups/public</url>
-		</repository>
+    <properties>
+        <project.build.number>0</project.build.number>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
-		<repository>
-			<id>vault-repo</id>
-			<url>https://nexus.hc.to/content/repositories/pub_releases/</url>
-		</repository>
+    <repositories>
+        <repository>
+            <id>spigotmc-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/groups/public</url>
+        </repository>
 
-		<repository>
-			<id>sk89q-repo</id>
-			<url>https://maven.enginehub.org/repo/</url>
-		</repository>
-		
+        <repository>
+            <id>vault-repo</id>
+            <url>https://nexus.hc.to/content/repositories/pub_releases/</url>
+        </repository>
+
+        <repository>
+            <id>sk89q-repo</id>
+            <url>https://maven.enginehub.org/repo/</url>
+        </repository>
+
         <repository>
             <id>glaremasters repo</id>
             <url>https://repo.glaremasters.me/repository/towny/</url>
         </repository>
     </repositories>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.spigotmc</groupId>
-			<artifactId>spigot-api</artifactId>
-			<version>1.21.4-R0.1-SNAPSHOT</version>
-			<type>jar</type>
-		</dependency>
+    <dependencies>
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>1.21.4-R0.1-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
 
-		<dependency>
-			<groupId>net.milkbowl.vault</groupId>
-			<artifactId>VaultAPI</artifactId>
-			<version>1.7</version>
-			<type>jar</type>
-		</dependency>
+        <dependency>
+            <groupId>net.milkbowl.vault</groupId>
+            <artifactId>VaultAPI</artifactId>
+            <version>1.7</version>
+            <type>jar</type>
+        </dependency>
 
-		<dependency>
-			<groupId>com.sk89q.worldguard</groupId>
-			<artifactId>worldguard-bukkit</artifactId>
-			<version>7.0.7</version>
-			<type>jar</type>
-		</dependency>
+        <dependency>
+            <groupId>com.sk89q.worldguard</groupId>
+            <artifactId>worldguard-bukkit</artifactId>
+            <version>7.0.7</version>
+            <type>jar</type>
+        </dependency>
 
-		<dependency>
-			<groupId>com.palmergames.bukkit.towny</groupId>
-			<artifactId>towny</artifactId>
-			<version>0.98.4.0</version>
-		</dependency>
+        <dependency>
+            <groupId>com.palmergames.bukkit.towny</groupId>
+            <artifactId>towny</artifactId>
+            <version>0.98.4.0</version>
+        </dependency>
 
-		<!-- Start of Test Dependencies -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.13.2</version>
-		</dependency>
+        <!-- Start of Test Dependencies -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+        </dependency>
 
-		<dependency>
-			<groupId>org.powermock</groupId>
-			<artifactId>powermock-module-junit4</artifactId>
-			<version>2.0.9</version>
-			<scope>test</scope>
-		</dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-module-junit4</artifactId>
+            <version>2.0.9</version>
+            <scope>test</scope>
+        </dependency>
 
-		<dependency>
-			<groupId>org.powermock</groupId>
-			<artifactId>powermock-api-easymock</artifactId>
-			<version>2.0.9</version>
-			<scope>test</scope>
-		</dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-api-easymock</artifactId>
+            <version>2.0.9</version>
+            <scope>test</scope>
+        </dependency>
 
-		<dependency>
-			<groupId>org.powermock</groupId>
-			<artifactId>powermock-api-mockito2</artifactId>
-			<version>2.0.9</version>
-			<scope>test</scope>
-		</dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-api-mockito2</artifactId>
+            <version>2.0.9</version>
+            <scope>test</scope>
+        </dependency>
 
-		<dependency>
-			<groupId>org.easymock</groupId>
-			<artifactId>easymock</artifactId>
-			<version>5.0.1</version>
-			<scope>test</scope>
-		</dependency>
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <version>5.0.1</version>
+            <scope>test</scope>
+        </dependency>
 
-		<dependency>
-			<groupId>com.carrotsearch</groupId>
-			<artifactId>junit-benchmarks</artifactId>
-			<version>0.7.2</version>
-			<scope>test</scope>
-		</dependency>
-		<!-- End of Test Dependencies -->
-	</dependencies>
+        <dependency>
+            <groupId>com.carrotsearch</groupId>
+            <artifactId>junit-benchmarks</artifactId>
+            <version>0.7.2</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- End of Test Dependencies -->
+    </dependencies>
 
-	<profiles>
-		<profile>
-			<id>jenkins</id>
-			<activation>
-				<property>
-					<name>env.BUILD_NUMBER</name>
-				</property>
-			</activation>
-			<properties>
-				<project.build.number>${env.BUILD_NUMBER}</project.build.number>
-			</properties>
-		</profile>
-	</profiles>
+    <profiles>
+        <profile>
+            <id>jenkins</id>
+            <activation>
+                <property>
+                    <name>env.BUILD_NUMBER</name>
+                </property>
+            </activation>
+            <properties>
+                <project.build.number>${env.BUILD_NUMBER}</project.build.number>
+            </properties>
+        </profile>
+    </profiles>
 
-	<build>
-		<directory>target</directory>
-		<outputDirectory>target/classes</outputDirectory>
-		<defaultGoal>clean install test</defaultGoal>
+    <build>
+        <directory>target</directory>
+        <outputDirectory>target/classes</outputDirectory>
+        <defaultGoal>clean install test</defaultGoal>
 
-		<resources>
-			<resource>
-				<targetPath>.</targetPath>
-				<filtering>true</filtering>
-				<directory>${basedir}/src/main/resources/</directory>
-				<includes>
-					<include>*.yml</include>
-				</includes>
-			</resource>
-		</resources>
+        <resources>
+            <resource>
+                <targetPath>.</targetPath>
+                <filtering>true</filtering>
+                <directory>${basedir}/src/main/resources/</directory>
+                <includes>
+                    <include>*.yml</include>
+                </includes>
+            </resource>
+        </resources>
 
-		<testResources>
-			<testResource>
-				<targetPath>.</targetPath>
-				<filtering>true</filtering>
-				<directory>${basedir}/src/main/resources/</directory>
-				<includes>
-					<include>*.yml</include>
-				</includes>
-			</testResource>
-		</testResources>
+        <testResources>
+            <testResource>
+                <targetPath>.</targetPath>
+                <filtering>true</filtering>
+                <directory>${basedir}/src/main/resources/</directory>
+                <includes>
+                    <include>*.yml</include>
+                </includes>
+            </testResource>
+        </testResources>
 
-		<!-- Plugins -->
-		<plugins>
-			<!-- Compile plugin -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.10.1</version>
-				<configuration>
-					<release>17</release>
-				</configuration>
-			</plugin>
+        <!-- Plugins -->
+        <plugins>
+            <!-- Compile plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.10.1</version>
+                <configuration>
+                    <release>17</release>
+                </configuration>
+            </plugin>
 
-			<!-- Token replacement plugin -->
-			<plugin>
-				<groupId>com.google.code.maven-replacer-plugin</groupId>
-				<artifactId>maven-replacer-plugin</artifactId>
-				<version>1.4.1</version>
-				<executions>
-					<execution>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>replace</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<file>target/classes/plugin.yml</file>
-					<replacements>
-						<replacement>
-							<token>maven-version-number</token>
-							<value>${project.version}-b${project.build.number}</value>
-						</replacement>
-					</replacements>
-				</configuration>
-			</plugin>
+            <!-- Token replacement plugin -->
+            <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>maven-replacer-plugin</artifactId>
+                <version>1.4.1</version>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <file>target/classes/plugin.yml</file>
+                    <replacements>
+                        <replacement>
+                            <token>maven-version-number</token>
+                            <value>${project.version}-b${project.build.number}</value>
+                        </replacement>
+                    </replacements>
+                </configuration>
+            </plugin>
 
-			<!-- Jar plugin -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.3.0</version>
-				<configuration>
-					<archive>
-						<manifestEntries />
-					</archive>
-				</configuration>
-			</plugin>
+            <!-- Jar plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries />
+                    </archive>
+                </configuration>
+            </plugin>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.0.0-M7</version>
-				<configuration>
-				<argLine>--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.util.regex=ALL-UNNAMED --add-opens java.logging/java.util.logging=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/sun.net.www.protocol.file=ALL-UNNAMED --add-opens java.base/sun.net.www=ALL-UNNAMED</argLine>
-					<parallel>methods</parallel>
-					<threadCount>10</threadCount>
-					<excludes>
-						<exclude>**/TestCommandSender.java</exclude>
-						<exclude>**/TestInstanceCreator.java</exclude>
-					</excludes>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>org.apache.maven.surefire</groupId>
-						<artifactId>surefire-junit4</artifactId>
-						<version>3.0.0-M7</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-		</plugins>
-	</build>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M7</version>
+                <configuration>
+                    <argLine>--add-opens java.base/java.lang=ALL-UNNAMED
+                        --add-opens java.base/java.io=ALL-UNNAMED --add-opens
+                        java.base/java.util.regex=ALL-UNNAMED --add-opens
+                        java.logging/java.util.logging=ALL-UNNAMED --add-opens
+                        java.base/java.util=ALL-UNNAMED --add-opens
+                        java.base/java.lang.reflect=ALL-UNNAMED --add-opens
+                        java.base/java.net=ALL-UNNAMED --add-opens
+                        java.base/sun.net.www.protocol.file=ALL-UNNAMED
+                        --add-opens java.base/sun.net.www=ALL-UNNAMED</argLine>
+                    <parallel>methods</parallel>
+                    <threadCount>10</threadCount>
+                    <excludes>
+                        <exclude>**/TestCommandSender.java</exclude>
+                        <exclude>**/TestInstanceCreator.java</exclude>
+                    </excludes>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.surefire</groupId>
+                        <artifactId>surefire-junit4</artifactId>
+                        <version>3.0.0-M7</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
 
-	<distributionManagement>
-		<repository>
-			<id>repo-release</id>
-			<name>CasinoSlots Releases</name>
-			<url>https://repo.craftyn.com/repository/internal/</url>
-		</repository>
-		<snapshotRepository>
-			<id>repo-snapshot</id>
-			<name>CasinoSlots Snapshots</name>
-			<url>https://repo.craftyn.com/repository/snapshots/</url>
-		</snapshotRepository>
-	</distributionManagement>
+    <distributionManagement>
+        <repository>
+            <id>repo-release</id>
+            <name>CasinoSlots Releases</name>
+            <url>https://repo.craftyn.com/repository/internal/</url>
+        </repository>
+        <snapshotRepository>
+            <id>repo-snapshot</id>
+            <name>CasinoSlots Snapshots</name>
+            <url>https://repo.craftyn.com/repository/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
