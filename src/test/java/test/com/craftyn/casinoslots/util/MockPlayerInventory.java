@@ -11,8 +11,11 @@ import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class MockPlayerInventory implements PlayerInventory {
 
@@ -317,6 +320,21 @@ public class MockPlayerInventory implements PlayerInventory {
 
     @Override
     public ItemStack getItem(EquipmentSlot slot) {
+        return null;
+    }
+
+    @Override
+    public @NotNull HashMap<Integer, ItemStack> removeItemAnySlot(@NotNull ItemStack... items) throws IllegalArgumentException {
+        return null;
+    }
+
+    @Override
+    public int close() {
+        return 0;
+    }
+
+    @Override
+    public @Nullable InventoryHolder getHolder(boolean useSnapshot) {
         return null;
     }
 }
