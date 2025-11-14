@@ -27,8 +27,6 @@ import org.mockito.stubbing.Answer;
 public class MockWorldFactory {
     private static final Map<String, World> createdWorlds = new HashMap<String, World>();
     private static final Map<UUID, World> worldUIDS = new HashMap<UUID, World>();
-    private static final Map<World, Boolean> pvpStates = new WeakHashMap<World, Boolean>();
-    private static final Map<World, Boolean> keepSpawnInMemoryStates = new WeakHashMap<World, Boolean>();
     private static final Map<World, Difficulty> difficultyStates = new WeakHashMap<World, Difficulty>();
 
     private static void registerWorld(World world) {
@@ -40,34 +38,6 @@ public class MockWorldFactory {
     private static World basics(String world, World.Environment env, WorldType type) {
         World mockWorld = mock(World.class);
         when(mockWorld.getName()).thenReturn(world);
-        when(mockWorld.getPVP()).thenAnswer(new Answer<Boolean>() {
-            public Boolean answer(InvocationOnMock invocation) throws Throwable {
-                World w = (World) invocation.getMock();
-                if (!pvpStates.containsKey(w))
-                    pvpStates.put(w, true); // default value
-                return pvpStates.get(w);
-            }
-        });
-        doAnswer(new Answer<Void>() {
-            public Void answer(InvocationOnMock invocation) throws Throwable {
-                pvpStates.put((World) invocation.getMock(), (Boolean) invocation.getArguments()[0]);
-                return null;
-            }
-        }).when(mockWorld).setPVP(anyBoolean());
-        when(mockWorld.getKeepSpawnInMemory()).thenAnswer(new Answer<Boolean>() {
-            public Boolean answer(InvocationOnMock invocation) throws Throwable {
-                World w = (World) invocation.getMock();
-                if (!keepSpawnInMemoryStates.containsKey(w))
-                    keepSpawnInMemoryStates.put(w, true); // default value
-                return keepSpawnInMemoryStates.get(w);
-            }
-        });
-        doAnswer(new Answer<Void>() {
-            public Void answer(InvocationOnMock invocation) throws Throwable {
-                keepSpawnInMemoryStates.put((World) invocation.getMock(), (Boolean) invocation.getArguments()[0]);
-                return null;
-            }
-        }).when(mockWorld).setKeepSpawnInMemory(anyBoolean());
         when(mockWorld.getDifficulty()).thenAnswer(new Answer<Difficulty>() {
             public Difficulty answer(InvocationOnMock invocation) throws Throwable {
                 World w = (World) invocation.getMock();
